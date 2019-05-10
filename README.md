@@ -1,11 +1,23 @@
 # Pong Innovation
-Automated ping-pong scoring system utilizing Darknet and YOLOv3 for object detection and a lightweight python game state engine for scoring, connected to a simple statistics backend built with Go and BoltDB
+Automated ping-pong scoring system utilizing a neural network approach to track the ball on a live feed from a cheap consumer webcam. 
 
----
+[Demo Video](http://youtube.com/watch?v=H17MOjoZ6AY)
+
+## Client
+* Python
+* [Darknet](https://github.com/pjreddie/darknet)
+* [YOLOv3](https://pjreddie.com/darknet/yolo/)
+* [opencv-python](https://pypi.org/project/opencv-python/)
+
+## Server
+* Go
+* [BoltDB](https://github.com/boltdb/bolt)
+* [Render](https://github.com/unrolled/render)
 
 # Credits
-##YOLOv3: An Incremental Improvement
-###Redmon, Joseph and Farhadi, Ali
-###arXiv
-###2018
+
+>YOLOv3: An Incremental Improvement\
+>Redmon, Joseph and Farhadi, Ali\
+>arXiv\
+>2018
 
