@@ -8,7 +8,7 @@ Automated ping-pong scoring system utilizing a neural network approach to track 
 * [opencv-python](https://pypi.org/project/opencv-python/)
 
 ## Server
-* Golang
+* Go
 * [BoltDB](https://github.com/boltdb/bolt)
 * [Render](https://github.com/unrolled/render)
 
