@@ -25,11 +25,11 @@ func getMatch(db *bolt.DB, id int) (Match, error) {
 		if bk == nil {
 			return errors.Wrapf(bolt.ErrBucketNotFound, "failed to open matches bucket")
 		}
-		matchjson := bk.Get([]byte(strconv.Itoa(id)))
+		matchjson := []byte(bk.Get([]byte(strconv.Itoa(id))))
 		if matchjson == nil {
 			return errors.Wrapf(mux.ErrNotFound, "no match found")
 		}
-		err := json.Unmarshal(matchjson, match)
+		err := json.Unmarshal(matchjson, &match)
 		if err != nil {
 			return errors.Wrapf(err, "retrieved invalid match from db")
 		}
@@ -53,7 +53,7 @@ func updateMatch(db *bolt.DB, id int, p1score int, p2score int) error {
 			return errors.Wrapf(mux.ErrNotFound, "no match found")
 		}
 		match := Match{}
-		err = json.Unmarshal(matchjson, match)
+		err = json.Unmarshal(matchjson, &match)
 		if err != nil {
 			return errors.Wrapf(err, "retrieved invalid match from db")
 		}
@@ -87,14 +87,18 @@ func createMatch(db *bolt.DB, p1name string, p2name string) (int, error) {
 		}
 
 		matchid := 1;
-
 		if bk.Stats().KeyN != 0 {
-			k, _ := bk.Cursor().Last();
+			/*k, _ := bk.Cursor().Last()
+			k, _ = bk.Cursor().Last()
+			fmt.Println("keyn")
+			fmt.Println(bk.Stats().KeyN)
 			lastid, _ := strconv.Atoi(string(k))
-			matchid = lastid+1
+			fmt.Println("lastid")
+			fmt.Println(lastid)*/
+			matchid = bk.Stats().KeyN+1
 		}
 
-		match := Match{Id: matchid, P1name: p1name, P2name: p2name, Timestamp: time.Now()}
+		match := Match{Id: matchid, P1name: p1name, P2name: p2name, P1score: 0, P2score: 0, Timestamp: time.Now()}
 		matchjson, err := json.Marshal(match)
 		if err != nil {
 			return errors.Wrapf(err, "error serializing new match")
@@ -122,8 +126,9 @@ func getMatches(db *bolt.DB) ([]Match, error) {
 		}
 		c := bk.Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
-			match := Match{}
-			err := json.Unmarshal(v, match)
+			data := []byte(v)
+			var match Match
+			err := json.Unmarshal(data, &match)
 			if err != nil {
 				return errors.Wrapf(err, "encountered malformed match with id " + string(k))
 			}

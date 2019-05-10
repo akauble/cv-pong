@@ -3,6 +3,7 @@ package main
 
 func main() {
     app := App{}
-    app.Init("matches.db")
-    app.Run(":80")
+    app.Init("matchessas.db")
+    defer app.DB.Close()
+    app.Run(":8080")
 }

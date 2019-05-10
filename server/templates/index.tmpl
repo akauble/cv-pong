@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pong Innovation - Match History</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+      <a class="navbar-brand" href="/">Pong Innovation</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Matches</a>
+        </li>-->
+      </ul>
+    </nav>
+  <h1>Matches</h1>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Time</th>
+        <th>Player 1</th>
+        <th>Player 2</th>
+        <th>P1 Score</th>
+        <th>P2 Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range .}}
+      <tr>
+        <td>{{- .Timestamp -}}</a></td>
+        <td>{{.P1name}}</td>
+        <td>{{.P2name}}</td>
+        <td>{{.P1score}}</td>
+        <td>{{.P2score}}</td>
+      </tr>
+      {{- end -}}
+    </tbody>
+  </table>
+</body>
+</html>
