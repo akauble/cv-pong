@@ -1,6 +1,8 @@
 # Pong Innovation
 Automated ping-pong scoring system utilizing a neural network approach to track the ball on a live feed from a cheap consumer webcam. 
 
+[Demo Video](http://youtube.com/watch?v=H17MOjoZ6AY)
+
 ## Client
 * Python
 * [Darknet](https://github.com/pjreddie/darknet)
